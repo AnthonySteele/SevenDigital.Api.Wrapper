@@ -16,14 +16,15 @@ namespace SevenDigital.Api.Wrapper.ExampleUsage
 			var artistId = Convert.ToInt32(s);
 
 			var appSettingsCredentials = new AppSettingsCredentials();
-			var apiUri = new ApiUri();
-
-			var api = new ApiFactory(apiUri, appSettingsCredentials);
 			Console.WriteLine("Using creds: {0} - {1}", appSettingsCredentials.ConsumerKey, appSettingsCredentials.ConsumerSecret);
 
+			var api = new ApiFactory();
+
 			// console apps can't have an async main method, so we have to call an async method 
-			var task = Use7DigitalApi(api, artistId);
-			task.Wait();
+			var task1 = Use7DigitalApi(api, artistId);
+			task1.Wait();
+			var task2 = Use7DigitalApi(api, artistId);
+			task2.Wait();
 
 			Console.ReadKey();
 		}
