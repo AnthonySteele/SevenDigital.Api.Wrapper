@@ -18,7 +18,7 @@ namespace SevenDigital.Api.Wrapper.ExampleUsage
 			var appSettingsCredentials = new AppSettingsCredentials();
 			Console.WriteLine("Using creds: {0} - {1}", appSettingsCredentials.ConsumerKey, appSettingsCredentials.ConsumerSecret);
 
-			var api = new ApiFactory();
+			var api = new ExampleApi();
 
 			// console apps can't have an async main method, so we have to call an async method 
 			var task1 = Use7DigitalApi(api, artistId);

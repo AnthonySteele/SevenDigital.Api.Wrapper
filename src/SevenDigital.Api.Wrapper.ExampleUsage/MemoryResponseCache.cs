@@ -17,7 +17,7 @@ namespace SevenDigital.Api.Wrapper.ExampleUsage
 		public void Set(RequestData key, object value)
 		{
 			var memoryCacheKey = MakeMemoryCacheKey(key);
-			_memoryCache.Set(memoryCacheKey, value, DefaultCachePolicy());
+			_memoryCache.Set(memoryCacheKey, value, DefaultExpiration());
 		}
 
 		public bool TryGet<T>(RequestData key, out T value)
@@ -41,11 +41,9 @@ namespace SevenDigital.Api.Wrapper.ExampleUsage
 			return "7digital_" + key.HttpMethod + "_" + key.Endpoint + "_" + paramValues;
 		}
 
-		private CacheItemPolicy DefaultCachePolicy()
+		private DateTimeOffset DefaultExpiration()
 		{
-			var policy = new CacheItemPolicy();
-			policy.AbsoluteExpiration = DateTimeOffset.Now.AddMinutes(10);
-			return policy;
+			return DateTimeOffset.Now.AddMinutes(10);
 		}
 	}
 }
