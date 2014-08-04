@@ -16,14 +16,14 @@ namespace SevenDigital.Api.Wrapper.ExampleUsage
 
 		public void Set(RequestData key, object value)
 		{
-			var memoryCacheKey = MakeMemoryCacheKey(key);
+			var memoryCacheKey = MakeCacheKey(key);
 			_memoryCache.Set(memoryCacheKey, value, DefaultExpiration());
 		}
 
 		public bool TryGet<T>(RequestData key, out T value)
 		{
-			var memoryCacheKey = MakeMemoryCacheKey(key);
-			var cacheValue = _memoryCache.Get(memoryCacheKey);
+			var cacheKey = MakeCacheKey(key);
+			var cacheValue = _memoryCache.Get(cacheKey);
 
 			if (cacheValue is T)
 			{
@@ -35,7 +35,7 @@ namespace SevenDigital.Api.Wrapper.ExampleUsage
 			return false;
 		}
 
-		private string MakeMemoryCacheKey(RequestData key)
+		private string MakeCacheKey(RequestData key)
 		{
 			var paramValues = string.Join("_", key.Parameters);
 			return "7digital_" + key.HttpMethod + "_" + key.Endpoint + "_" + paramValues;
